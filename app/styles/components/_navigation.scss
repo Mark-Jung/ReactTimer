@@ -1,0 +1,17 @@
+.top-bar, .top-bar ul {
+  background-color: $nav-background;
+}
+
+.top-bar{
+  .menu-text{
+    color: $nav-text-color;
+  }
+  p {
+    display: inline;
+    color: white;
+  }
+  .credit{
+    color: skyblue;
+  }
+
+}
