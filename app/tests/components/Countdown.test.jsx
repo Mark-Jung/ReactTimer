@@ -16,7 +16,6 @@ describe('Countdown', () => {
       var countdown = TestUtils.renderIntoDocument(<Countdown/>);
       countdown.handleSetCountdown(10);
 
-
       expect(countdown.state.count).toBe(10);
       expect(countdown.state.countdownStatus).toBe('started');
       setTimeout(() => {
@@ -34,7 +33,28 @@ describe('Countdown', () => {
       done();
     }, 3001)
   });
+  it('should freeze countdown when paused', (done) => {
+    var countdown = TestUtils.renderIntoDocument(<Countdown/>);
+    countdown.handleSetCountdown(3);
+    countdown.handleStatusChange('paused');
 
+    setTimeout(() => {
+      expect(countdown.state.count).toBe(3, 'deos not freeze count');
+      expect(countdown.state.countdownStatus).toBe('paused', 'deos not change status to pauseed');
+      done();
+    }, 1001);
+  });
+  it('should reset count when canceled', (done) => {
+    var countdown = TestUtils.renderIntoDocument(<Countdown/>);
+    countdown.handleSetCountdown(3);
+    countdown.handleStatusChange('stopped');
+
+    setTimeout(() => {
+      expect(countdown.state.count).toBe(0, 'deos not reset count');
+      expect(countdown.state.countdownStatus).toBe('stopped', 'deos not change status to stopped');
+      done();
+    }, 1001);
+  });
 
 
 });
